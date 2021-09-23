@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_SLSH, KC_D,    KC_R,    KC_W,    KC_B,                               KC_J,    KC_F,    KC_U,    KC_P,    KC_AT,   KC_GRV,
+     KC_TAB,  KC_SLSH, KC_D,    KC_R,    KC_W,    KC_B,                               KC_J,    KC_F,    KC_U,    KC_P,    KC_QUOT, KC_GRV,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_A,    KC_S,    KC_H,    KC_T,    KC_G,                               KC_Y,    KC_N,    KC_E,    KC_O,    KC_I,    KC_ESC,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -31,24 +31,81 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
+//  // ease of access score
+//  // ignoring top row as > 4
+//  // avoid outside column too!
+//  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+//     x      , x      , x      , x      , x      , x      ,                            x      , x      , x      , x      , x      , x      ,
+//  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+//     9      , 4      , 2      , 2      , 3      , 4      ,                            4      , 3      , 2      , 2      , 4      , 9      ,
+//  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+//     9      , 1.5    , 1      , 1      , 1      , 3      ,                            3      , 1      , 1      , 1      , 1.5    , 9      ,
+//  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+//     9      , 4      , 4      , 3      , 2      , 4      , 5      ,          5      , 4      , 2      , 3      , 4      , 4      , 9      ,
+//  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+//                                    4      , 2      , 1      ,                   1      , 2      , 4
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+
+  // new num layer
+  // numbers on home row
+  // less symmetry, more accessible vs frequency correlation
+  // rough priority order:
+  //
+  // KC_COMM    , and <
+  // KC_DOT     . and >
+  //
+  // KC_SLSH    / and ?
+  // KC_NUBS    Non-US \ and \| or 'normal' KC_BSLS? - try both and pick one
+  //
+  // KC_LBRC    [ and {
+  // KC_RBRC    ] and }
+  // KC_SCLN    ; and :
+  // KC_QUOT    ' and "
+  // KC_MINS    - and _
+  // KC_EQL     = and +
+  //
+  // KC_NUHS    Non-US # and ~
+  // KC_GRV     ` and ~
+  //
+  // 12 keys
+  //
 
   // number row more accessible, plus (programming) symbols
   [_NUM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-  //          4 $      3 £      2 "      1 !      5 %                                 9 (      0 )      6 ^      7 &      8 *      ?
-     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_9,    KC_0,    KC_6,    KC_7,    KC_8,    KC_QUES,
+  //                   `  ~     '  @     [  {                                                  ]  }     ;  :     #  ~
+     _______, _______, KC_GRV,  KC_QUOT, KC_LBRC, _______,                            _______, KC_RBRC, KC_SCLN, KC_NUHS, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-  // _        \ |      <        [        (        {                                   }        )        ]        >        / ?      -
-     KC_UNDS, KC_NUBS, KC_LT,   KC_LBRC, KC_LPRN, KC_LCBR,                            KC_RCBR, KC_RPRN, KC_RBRC, KC_GT,   KC_SLSH, KC_MINS,
+  //          4 $      3 £      2 "      1 !      5 %                                 9 (      0 )      6 ^      7 &      8 *
+     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_9,    KC_0,    KC_6,    KC_7,    KC_8,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-  // +        :        "        ~        ` ~      |                                   ,        .         # ~      ' "      ; :      =
-     KC_PLUS, KC_COLN, KC_DQUO, KC_TILD, KC_GRV,  KC_PIPE, _______,          _______, KC_COMM, KC_DOT,   KC_NUHS, KC_QUOT, KC_SCLN, KC_EQL,
+  //          -  _                       \  |                                                  /  ?                       =  +
+     _______, KC_MINS, _______, _______, KC_NUBS, _______, _______,          _______, _______, KC_SLSH, _______, _______, KC_EQL,  _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
+
+//  // deprecated
+//  // number row more accessible, plus (programming) symbols
+//  [_NUM] = LAYOUT(
+//  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+//     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+//  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+//  //          4 $      3 £      2 "      1 !      5 %                                 9 (      0 )      6 ^      7 &      8 *      ?
+//     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_9,    KC_0,    KC_6,    KC_7,    KC_8,    KC_QUES,
+//  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+//  // _        \ |      <        [        (        {                                   }        )        ]        >        / ?      -
+//     KC_UNDS, KC_NUBS, KC_LT,   KC_LBRC, KC_LPRN, KC_LCBR,                            KC_RCBR, KC_RPRN, KC_RBRC, KC_GT,   KC_SLSH, KC_MINS,
+//  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+//  // +        :        "        ~        ` ~      |                                   ,        .         # ~      ' "      ; :      =
+//     KC_PLUS, KC_COLN, KC_DQUO, KC_TILD, KC_GRV,  KC_PIPE, _______,          _______, KC_COMM, KC_DOT,   KC_NUHS, KC_QUOT, KC_SCLN, KC_EQL,
+//  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+//                                    _______, _______, _______,                   _______, _______, _______
+//                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+//  ),
 
   // navigation
   // toggle to this layer from base (workman) ( and back again)
@@ -81,45 +138,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case WORKMAN:
-      if (record->event.pressed) {
-        set_single_persistent_default_layer(_WORKMAN);
-      }
-      return false;
-      break;
-    case LOWER:
-      if (record->event.pressed) {
-        layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      break;
-  }
-  return true;
-}
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//   switch (keycode) {
+//     case WORKMAN:
+//       if (record->event.pressed) {
+//         set_single_persistent_default_layer(_WORKMAN);
+//       }
+//       return false;
+//       break;
+//     case LOWER:
+//       if (record->event.pressed) {
+//         layer_on(_LOWER);
+//         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+//       } else {
+//         layer_off(_LOWER);
+//         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+//       }
+//       return false;
+//       break;
+//     case RAISE:
+//       if (record->event.pressed) {
+//         layer_on(_RAISE);
+//         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+//       } else {
+//         layer_off(_RAISE);
+//         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+//       }
+//       return false;
+//       break;
+//     case ADJUST:
+//       if (record->event.pressed) {
+//         layer_on(_ADJUST);
+//       } else {
+//         layer_off(_ADJUST);
+//       }
+//       return false;
+//       break;
+//   }
+//   return true;
+// }
 
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
